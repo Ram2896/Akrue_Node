@@ -4,6 +4,7 @@ const fs = require("fs");
 const Waitlist = require("../models/waitlist");
 const { errorHandler } = require("../helpers/dbErrorHandler");
 const { constants } = require("buffer");
+const sendEmail = require("../helpers/email");
 
 exports.productById = (req, res, next, id) => {
   Product.findById(id)
@@ -71,7 +72,15 @@ exports.create = (req, res) => {
         error: errorHandler(err),
       });
     }
-    res.json(result);
+    // res.json(result);
+    res.json('Sucessfully added')
+    sendEmail({
+      email: "ramachari2896@gmail.com",
+      subject: "Welcome to Akrue Joinlist",
+      message: `Email: ${waitlist.userEmail}, Name: ${waitlist.firstName} , Last Name: ${waitlist.lastName}, University : ${waitlist.university},
+      Graduating Year: ${waitlist.graduatingYear}, Sport: ${waitlist.sport} , Gender: ${waitlist.gender} ,
+      Insta Username : ${waitlist.instaUsername}, refererEmail: ${waitlist.refererEmail} `,
+    });
   });
 };
 
@@ -198,11 +207,6 @@ exports.update = (req, res) => {
   });
 };
 
-// sell/ arrival
-// sell= /products?sortBy=sold&order=desc&limit=4
-// arrival= /products?sortBy=createdAt&order=desc&limit=4
-// If no params aare sent, then all products are returned
-
 exports.list = (req, res) => {
   // console.log("inside list");
   let order = req.query.order ? req.query.order : "asc";
@@ -223,6 +227,18 @@ exports.list = (req, res) => {
       res.json(waitlist);
     });
 };
+
+exports.mailus =(req, res) => {
+  const {
+  name,email,message
+  } = req.body;
+  res.json('Sucessfully Sent')
+  sendEmail({
+    email: "balaji@handwtech.com",
+    subject: `${name}. email: ${email} contactus form`,
+    message: `${message}`,
+  });
+}
 // It will find product based on the request product category
 //  Other product that has the same category will be returned
 exports.listRelated = (req, res) => {
