@@ -20,10 +20,17 @@ exports.productById = (req, res, next, id) => {
     });
 };
 
+exports.welcome = (req, res) => {
+  return res.json("Welcome");
+};
+
+
 exports.read = (req, res) => {
   req.product.photo = undefined;
   return res.json(req.product);
 };
+
+
 exports.create = (req, res) => {
   // Check for all fields
   const {
@@ -77,9 +84,44 @@ exports.create = (req, res) => {
     sendEmail({
       email: "ramachari2896@gmail.com",
       subject: "Welcome to Akrue Joinlist",
-      message: `Email: ${waitlist.userEmail}, Name: ${waitlist.firstName} , Last Name: ${waitlist.lastName}, University : ${waitlist.university},
-      Graduating Year: ${waitlist.graduatingYear}, Sport: ${waitlist.sport} , Gender: ${waitlist.gender} ,
-      Insta Username : ${waitlist.instaUsername}, refererEmail: ${waitlist.refererEmail} `,
+      message: `<table style="border-collapse:collapse;width: 70%; margin: auto;">
+      <tr>
+        <th colspan="2" style=" border: 1px solid #dddddd;text-align: left; padding: 8px;text-align: center">${waitlist.firstName} ${waitlist.lastName}</th>
+    
+      </tr>
+      <tr>
+        <td style=" border: 1px solid #dddddd;text-align: center; padding: 8px; background-color: #dddddd;">Email</td>
+        <td style=" border: 1px solid #dddddd;text-align: center; padding: 8px;">${waitlist.userEmail}</td>
+      </tr>
+      <tr>
+        <td style=" border: 1px solid #dddddd;text-align: center; padding: 8px; background-color: #dddddd;">University </td>
+        <td style=" border: 1px solid #dddddd;text-align: center; padding: 8px;">${waitlist.university}</td>
+      </tr>
+      <tr>
+        <td style=" border: 1px solid #dddddd;text-align: center; padding: 8px; background-color: #dddddd;">Graduating Year </td>
+        <td style=" border: 1px solid #dddddd;text-align: center; padding: 8px;">${waitlist.graduatingYear}</td>
+      </tr>
+      <tr>
+        <td style=" border: 1px solid #dddddd;text-align: center; padding: 8px; background-color: #dddddd;"> Sport </td>
+        <td style=" border: 1px solid #dddddd;text-align: center; padding: 8px;">${waitlist.sport}</td>
+      </tr>
+      <tr>
+        <td style=" border: 1px solid #dddddd;text-align: center; padding: 8px; background-color: #dddddd;"> Gender </td>
+        <td style=" border: 1px solid #dddddd;text-align: center; padding: 8px;"> ${waitlist.gender}</td>
+      </tr>
+      <tr>
+        <td style=" border: 1px solid #dddddd;text-align: center; padding: 8px; background-color: #dddddd;"> Insta Username </td>
+        <td style=" border: 1px solid #dddddd;text-align: center; padding: 8px;"> ${waitlist.instaUsername}</td>
+      </tr>
+      <tr>
+        <td style=" border: 1px solid #dddddd;text-align: center; padding: 8px; background-color: #dddddd;"> refererEmail </td>
+        <td style=" border: 1px solid #dddddd;text-align: center; padding: 8px;"> ${waitlist.refererEmail} </td>
+      </tr>
+    
+    </table>`
+      // messagec: `Email: ${waitlist.userEmail}, Name: ${waitlist.firstName} , Last Name: ${waitlist.lastName}, University : ${waitlist.university},
+      // Graduating Year: ${waitlist.graduatingYear}, Sport: ${waitlist.sport} , Gender: ${waitlist.gender} ,
+      // Insta Username : ${waitlist.instaUsername}, refererEmail: ${waitlist.refererEmail} `,
     });
   });
 };

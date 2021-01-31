@@ -15,6 +15,7 @@ const router = express.Router();
 //   listSearch,
 // } = require("../controllers/product");
 const {
+  welcome,
   create,
   productById,
   read,
@@ -47,7 +48,7 @@ const { userById } = require("../controllers/user");
   //   update
   // );
   
-  router.get("/waitlists",  list);
+  router.get("/welcome",  welcome);
   router.post("/waitlist/create", create);
   router.get("/waitlists/:userId", requireSignin, isAuth, isAdmin, list);
   router.post("/contactus", mailus)

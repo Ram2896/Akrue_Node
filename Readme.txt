@@ -8,6 +8,9 @@ git commit -m "mesg"
 git push origin main
 
 
+git push heroku main
+
+
 
 
 
